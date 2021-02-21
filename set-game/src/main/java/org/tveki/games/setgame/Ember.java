@@ -8,6 +8,15 @@ public class Ember {
         this.name = name;
     }
 
+    public void kakil() {
+        System.out.println(name + " kakil.");
+    }
+
+    public void felebred() {
+        System.out.println("*********** nap eleje ***********");
+        System.out.println(name + " felébred.");
+    }
+
     public int eszik(String kaja, int kaloria) {
         System.out.println(name + " ezt ette: " + kaja + ", ennyi kalória volt benne: " + kaloria);
         final int kapottEletero = 10 * kaloria;
@@ -23,7 +32,7 @@ public class Ember {
 
     public void alszik() {
         System.out.println(name + " alszik.");
-        System.out.println("--------------nap vége--------------");
+        System.out.println("-------------- nap vége --------------");
     }
 
 }
