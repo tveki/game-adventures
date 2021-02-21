@@ -1,4 +1,4 @@
-package org.tveki.games.setgame;
+package org.tveki.games.alapozo;
 
 public class Ember {
 
