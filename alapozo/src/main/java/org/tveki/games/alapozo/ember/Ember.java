@@ -9,30 +9,34 @@ public class Ember {
     }
 
     public void kakil() {
-        System.out.println(name + " kakil.");
+        kiir("%s kakil.%n", name);
     }
 
     public void felebred() {
-        System.out.println("*********** nap eleje ***********");
-        System.out.println(name + " felébred.");
+        kiir("*********** nap eleje ***********%n");
+        kiir( "%s felébred.%n",name);
     }
 
     public int eszik(String kaja, int kaloria) {
-        System.out.println(name + " ezt ette: " + kaja + ", ennyi kalória volt benne: " + kaloria);
+        kiir("%s ezt ette: %s, ennyi kalória volt benne: %d%n", name,  kaja, kaloria);
         final int kapottEletero = 10 * kaloria;
-        System.out.println("Kapott életerő: " + kapottEletero);
+        kiir("Kapott életerő: %d%n", kapottEletero);
         return kapottEletero;
     }
 
     public int fut(int tavolsag) {
         final int elegetettKaloria = 2 * tavolsag;
-        System.out.println(name + " ennyi km-t futott: " + tavolsag + ", ennyi kalóriát égetett el: " + elegetettKaloria);
+        kiir("%s ennyi km-t futott: %d, ennyi kalóriát égetett el: %d%n", name, tavolsag, elegetettKaloria);
         return elegetettKaloria;
     }
 
     public void alszik() {
-        System.out.println(name + " alszik.");
-        System.out.println("-------------- nap vége --------------");
+        kiir( "%s alszik.%n", name);
+        kiir("-------------- nap vége --------------%n");
+    }
+
+    private void kiir(String sablon, Object... parameterek) {
+        System.out.printf(sablon, parameterek);
     }
 
 }
