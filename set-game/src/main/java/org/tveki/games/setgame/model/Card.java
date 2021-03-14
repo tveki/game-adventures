@@ -29,4 +29,14 @@ public class Card {
     public Shading getShading() {
         return shading;
     }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "shape=" + shape +
+                ", color=" + color +
+                ", number=" + number +
+                ", shading=" + shading +
+                '}';
+    }
 }
