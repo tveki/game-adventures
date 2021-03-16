@@ -18,7 +18,7 @@ public  class SetServiceTest {
     @Test
     public void testIfDifferentShapesAndSameColorsAndSameNumbersAndDifferentShading() {
         Card a = new Card(Shape.SQUIGGLE, Color.RED, Number.ONE, Shading.SOLID);
-        Card b = new Card(Shape.DIAMOND, Color.RED, Number.ONE, Shading.OUTLINED);
+        Card b = new Card(Shape.DIAMOND, Color.RED, Number.ONE, Shading.OPEN);
         Card c = new Card(Shape.OVAL, Color.RED, Number.ONE, Shading.STRIPED);
 
         assertTrue(setService.isSet(a, b, c));
@@ -28,7 +28,7 @@ public  class SetServiceTest {
     public void testIfSameShapesAndDifferentColorsAndSameNumbersAndSameShading() {
         Card a = new Card(Shape.OVAL, Color.RED, Number.ONE, Shading.STRIPED);
         Card b = new Card(Shape.OVAL, Color.GREEN, Number.ONE, Shading.STRIPED);
-        Card c = new Card(Shape.OVAL, Color.PURPLE, Number.ONE, Shading.STRIPED);
+        Card c = new Card(Shape.OVAL, Color.BLUE, Number.ONE, Shading.STRIPED);
 
         assertTrue(setService.isSet(a, b, c));
     }
@@ -37,7 +37,7 @@ public  class SetServiceTest {
     public void testIfSameShapesAndDifferentColorsAndSameNumbersAndTwoShading() {
         Card a = new Card(Shape.OVAL, Color.RED, Number.ONE, Shading.SOLID);
         Card b = new Card(Shape.OVAL, Color.GREEN, Number.ONE, Shading.STRIPED);
-        Card c = new Card(Shape.OVAL, Color.PURPLE, Number.ONE, Shading.STRIPED);
+        Card c = new Card(Shape.OVAL, Color.BLUE, Number.ONE, Shading.STRIPED);
 
         assertFalse(setService.isSet(a, b, c));
     }

@@ -14,7 +14,7 @@ public class CardService {
             for (Color color : Color.values()) {
                 for (Number number : Number.values()) {
                     for (Shading shading : Shading.values()) {
-                       cards.add(new Card(shape, color, number, shading));
+                        cards.add(new Card(shape, color, number, shading));
                     }
                 }
             }
@@ -22,4 +22,27 @@ public class CardService {
         return cards;
     }
 
+    public String getPng(Card card) {
+        return png(
+                card.getShape(),
+                card.getShading(),
+                card.getColor()
+        );
+    }
+
+    public List<String> getAllPngs() {
+        List<String> pngs = new ArrayList<>();
+        for (Shape shape : Shape.values()) {
+            for (Shading shading : Shading.values()) {
+                for (Color color : Color.values()) {
+                    pngs.add(png(shape, shading, color));
+                }
+            }
+        }
+        return pngs;
+    }
+
+    private String png(Shape shape, Shading shading, Color color) {
+        return (shape.name() + "_" + shading.name() + "_" + color.name()).toLowerCase() + ".png";
+    }
 }

@@ -22,6 +22,10 @@ public class Game {
 //            System.out.println(card);
 //        }
 
+        for (String png : cardService.getAllPngs()) {
+            System.out.println("wget https://smart-games.org/images/" + png);
+        }
+
         cardsOnTable = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             cardsOnTable.add(allCards.get(i));
