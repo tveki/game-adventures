@@ -14,8 +14,6 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public abstract class AbstractRedrawable implements Redrawable, HasLayers {
     
-    private final Transformer transformer = new Transformer();
-    
     protected GraphicsContext getContext(int index) {
         return getLayer(index).getGraphicsContext2D();
     }
@@ -36,14 +34,6 @@ public abstract class AbstractRedrawable implements Redrawable, HasLayers {
         getContext(layer).clearRect(0, 0, 
                 layer.getWidth(),
                 layer.getHeight());
-    }
-
-    protected double transformX(double x) {
-        return transformer.transformX(x);
-    }
-
-    protected double transformY(double y) {
-        return transformer.transformY(y);
     }
     
     protected void clearLayers() {

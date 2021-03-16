@@ -3,11 +3,22 @@ package org.tveki.games.setgame;
 import org.tveki.games.setgame.model.Card;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 public class Game {
+
+    private static Game instance;
+
+    public static Game getInstance() {
+        if (instance == null) {
+            instance = new Game();
+        }
+        return instance;
+    }
+
+    private Game() {
+    }
 
     private CardService cardService = new CardService();
 
@@ -17,20 +28,11 @@ public class Game {
     public void start() {
         allCards = cardService.getAllCards();
         Collections.shuffle(allCards);
-
-//        for (Card card : allCards) {
-//            System.out.println(card);
-//        }
-
-        for (String png : cardService.getAllPngs()) {
-            System.out.println("wget https://smart-games.org/images/" + png);
-        }
-
         cardsOnTable = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            cardsOnTable.add(allCards.get(i));
-        }
-
+        cardsOnTable.addAll(allCards.subList(0, 12));
     }
 
+    public List<Card> getCardsOnTable() {
+        return Collections.unmodifiableList(cardsOnTable);
+    }
 }

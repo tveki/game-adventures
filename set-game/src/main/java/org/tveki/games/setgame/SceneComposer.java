@@ -17,16 +17,13 @@ public class SceneComposer {
     public static final int SCENE_WIDTH = CanvasProps.CANVAS_WIDTH;
     public static final int SCENE_HEIGHT = CanvasProps.CANVAS_HEIGHT + 100;
 
-    public Scene compose() {
+    public Scene compose(Table table) {
         VBox pane = new VBox();
 
         Pane canvasPane = new Pane();
         pane.getChildren().add(canvasPane);
 
-        CardDisplay cardDisplay = new CardDisplay();
-        canvasPane.getChildren().addAll(cardDisplay.getLayers());
-
-        cardDisplay.redraw();
+        canvasPane.getChildren().addAll(table.getLayers());
 
         return new Scene(pane, SCENE_WIDTH, SCENE_HEIGHT);
     }

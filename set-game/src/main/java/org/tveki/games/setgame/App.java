@@ -7,16 +7,16 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     public static void main(String[] args) {
-        Game game = new Game();
-        game.start();
-
+        Game.getInstance().start();
         launch(args);
     }
 
     @Override
     public void start(Stage stage) {
+        Table table = new Table();
+        table.updateCards(Game.getInstance().getCardsOnTable());
         SceneComposer composer = new SceneComposer();
-        Scene scene = composer.compose();
+        Scene scene = composer.compose(table);
         stage.setTitle("The Set Card Game");
         stage.setScene(scene);
         stage.show();
