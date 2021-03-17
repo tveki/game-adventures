@@ -6,6 +6,7 @@
 package org.tveki.games.setgame;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -24,6 +25,13 @@ public class SceneComposer {
         pane.getChildren().add(canvasPane);
 
         canvasPane.getChildren().addAll(table.getLayers());
+
+//        Pane controlPane = new Pane();
+//
+//        Button button = new Button("Restart");
+//
+//        controlPane.getChildren().add(button);
+//        pane.getChildren().add(controlPane);
 
         return new Scene(pane, SCENE_WIDTH, SCENE_HEIGHT);
     }
