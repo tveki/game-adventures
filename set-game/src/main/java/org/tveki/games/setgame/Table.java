@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import org.apache.commons.math3.util.Combinations;
 import org.tveki.games.setgame.model.Number;
 import org.tveki.games.setgame.model.*;
 
@@ -26,12 +27,15 @@ public class Table extends AbstractRedrawable {
 
 
     private CardImageProvider imageProvider = new CardImageProvider();
+    private SetService setService = new SetService();
 
     private final Canvas cardLayer;
     private final Canvas selectionLayer;
 
     private List<Card> cards;
     private Set<Integer> selected;
+
+    boolean setFound;
 
     public Table() {
         cardLayer = new Canvas(CanvasProps.CANVAS_WIDTH, CanvasProps.CANVAS_HEIGHT);
@@ -48,20 +52,57 @@ public class Table extends AbstractRedrawable {
         System.out.println("x=" + event.getX() + ", y=" + event.getY());
         final Optional<Integer> cardOptional = getCardAt(event.getX(), event.getY());
         if (cardOptional.isPresent()) {
-            int cardIndex = cardOptional.get();
-            if (selected.contains(cardIndex)) {
-                selected.remove(cardIndex);
-                clearSelection(cardIndex);
-            } else {
-                selected.add(cardIndex);
-                showSelection(cardIndex);
-            }
+            int card = cardOptional.get();
+            select(card);
+        }
+    }
+
+    private void selectCards(int... cards) {
+        for (int card : cards) {
+            select(card);
+        }
+    }
+
+    private void select(int card) {
+        if (selected.contains(card)) {
+            selected.remove(card);
+            clearSelection(card);
+        } else {
+            selected.add(card);
+            showSelection(card);
         }
     }
 
     public void updateCards(List<Card> cards) {
         this.cards = cards;
         redraw();
+        findSet();
+    }
+
+    private void findSet() {
+        Combinations combinations = new Combinations(12, 3);
+        combinations.forEach(this::testSet);
+    }
+
+    private void testSet(int[] combination) {
+        if (setFound) {
+            return;
+        }
+
+        int i = combination[0];
+        int j = combination[1];
+        int k = combination[2];
+
+        boolean isSet = setService.isSet(
+                cards.get(i),
+                cards.get(j),
+                cards.get(k)
+        );
+
+        if (isSet) {
+            selectCards(i, j, k);
+            setFound = true;
+        }
     }
 
     private void drawCard(Card card, double x, double y) {

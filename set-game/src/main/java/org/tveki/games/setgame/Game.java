@@ -1,6 +1,8 @@
 package org.tveki.games.setgame;
 
+import org.apache.commons.math3.util.Combinations;
 import org.tveki.games.setgame.model.Card;
+import org.tveki.games.setgame.model.SetService;
 
 import java.util.ArrayList;
 import java.util.Collections;
