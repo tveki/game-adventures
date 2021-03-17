@@ -14,22 +14,10 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public abstract class AbstractRedrawable implements Redrawable, HasLayers {
     
-    protected GraphicsContext getContext(int index) {
-        return getLayer(index).getGraphicsContext2D();
-    }
-    
     protected GraphicsContext getContext(Canvas layer) {
         return layer.getGraphicsContext2D();
     }
-    
-    protected Canvas getLayer(int index) {
-        return getLayers().get(index);
-    }
-    
-    protected void clearLayer(int index) {
-        clearLayer(getLayer(index));
-    }
-    
+
     protected void clearLayer(Canvas layer) {
         getContext(layer).clearRect(0, 0, 
                 layer.getWidth(),

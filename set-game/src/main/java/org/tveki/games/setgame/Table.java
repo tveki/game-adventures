@@ -16,12 +16,12 @@ public class Table extends AbstractRedrawable {
 
     public static final double CARD_WIDTH = 100;
     public static final double CARD_HEIGHT = 180;
-    public static final double CARD_IMAGE_WIDTH = 60;
-    public static final double CARD_IMAGE_HEIGHT = 25;
-    public static final double CARD_IMAGE_VERTICAL_FACTOR = 1.5; //recommended value is between 1 and 2
+    public static final double SYMBOL_WIDTH = 60;
+    public static final double SYMBOL_HEIGHT = 25;
+    public static final double SYMBOL_VERTICAL_FACTOR = 1.5; //recommended value is between 1 and 2
     public static final double CARD_ARC = 15;
-    public static final double HORIZONTAL_GAP = 30;
-    public static final double VERTICAL_GAP = 30;
+    public static final double HORIZONTAL_SPACE = 30;
+    public static final double VERTICAL_SPACE = 30;
     public static final double SELECTION_LINE_WIDTH = 5;
 
 
@@ -36,8 +36,8 @@ public class Table extends AbstractRedrawable {
     public Table() {
         cardLayer = new Canvas(CanvasProps.CANVAS_WIDTH, CanvasProps.CANVAS_HEIGHT);
         selectionLayer = new Canvas(CanvasProps.CANVAS_WIDTH, CanvasProps.CANVAS_HEIGHT);
-        selectionLayer.getGraphicsContext2D().setLineWidth(SELECTION_LINE_WIDTH);
-        selectionLayer.getGraphicsContext2D().setStroke(Color.ORANGE);
+        getContext(selectionLayer).setLineWidth(SELECTION_LINE_WIDTH);
+        getContext(selectionLayer).setStroke(Color.ORANGE);
 
         cardLayer.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onTableClick);
         selectionLayer.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onTableClick);
@@ -77,10 +77,10 @@ public class Table extends AbstractRedrawable {
         );
         for (int i = 0; i < number.getValue(); i++) {
             getContext(cardLayer).drawImage(image,
-                    getX(x),
-                    getY(y, number, i),
-                    CARD_IMAGE_WIDTH,
-                    CARD_IMAGE_HEIGHT);
+                    getSymbolX(x),
+                    getSymbolY(y, number, i),
+                    SYMBOL_WIDTH,
+                    SYMBOL_HEIGHT);
         }
     }
 
@@ -109,11 +109,11 @@ public class Table extends AbstractRedrawable {
         );
     }
 
-    private double getX(double x) {
-        return x + CARD_WIDTH / 2 - CARD_IMAGE_WIDTH / 2;
+    private double getSymbolX(double x) {
+        return x + CARD_WIDTH / 2 - SYMBOL_WIDTH / 2;
     }
 
-    private double getY(double y, Number number, int i) {
+    private double getSymbolY(double y, Number number, int i) {
         double middle = y + CARD_HEIGHT / 2;
         double position;
         switch (number) {
@@ -133,7 +133,7 @@ public class Table extends AbstractRedrawable {
                 throw new RuntimeException("Unknown number: " + number);
             }
         }
-        return middle + position * CARD_IMAGE_HEIGHT * CARD_IMAGE_VERTICAL_FACTOR - CARD_IMAGE_HEIGHT / 2;
+        return middle + position * SYMBOL_HEIGHT * SYMBOL_VERTICAL_FACTOR - SYMBOL_HEIGHT / 2;
     }
 
     @Override
@@ -154,7 +154,6 @@ public class Table extends AbstractRedrawable {
 
     private Optional<Integer> getCardAt(double x, double y) {
         for (int i = 0; i < cards.size(); i++) {
-            Card card = cards.get(i);
             double xDiff = x - getCardX(i);
             double yDiff = y - getCardY(i);
             if (xDiff >= 0 && xDiff <= CARD_WIDTH && yDiff >= 0 && yDiff <= CARD_HEIGHT) {
@@ -165,10 +164,10 @@ public class Table extends AbstractRedrawable {
     }
 
     private double getCardY(int i) {
-        return VERTICAL_GAP + Math.floor(i / 4) * (CARD_HEIGHT + VERTICAL_GAP);
+        return VERTICAL_SPACE + Math.floor(i / 4) * (CARD_HEIGHT + VERTICAL_SPACE);
     }
 
     private double getCardX(int i) {
-        return HORIZONTAL_GAP + (i % 4) * (CARD_WIDTH + HORIZONTAL_GAP);
+        return HORIZONTAL_SPACE + (i % 4) * (CARD_WIDTH + HORIZONTAL_SPACE);
     }
 }
