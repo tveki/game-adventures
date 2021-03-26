@@ -1,6 +1,7 @@
 package org.tveki.games.setgame;
 
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -8,10 +9,7 @@ import org.apache.commons.math3.util.Combinations;
 import org.tveki.games.setgame.model.Number;
 import org.tveki.games.setgame.model.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class Table extends AbstractRedrawable {
 
@@ -77,6 +75,29 @@ public class Table extends AbstractRedrawable {
         this.cards = cards;
         redraw();
         findSet();
+//        probaRajz();
+    }
+
+    private void probaRajz() {
+        final GraphicsContext context = getContext(cardLayer);
+//        context.strokeRoundRect(500, 300, 186, 272, 80, 80);
+//        context.arc(620, 470, 40, 60, 30, 200);
+
+        Color[] colors = {
+                Color.YELLOW, Color.GREEN, Color.RED, Color.GREY, Color.BLUE,
+                Color.BEIGE, Color.ORANGE, Color.PINK, Color.PURPLE, Color.AQUA};
+
+        Random random = new Random();
+
+        for (int i = 10; i > 0; i--) {
+            context.setFill(colors[random.nextInt(10)]);
+            context.fillOval(220 + (10 - i) * 30, 100 + (10 - i) * 15, 64 * i, 30 * i);
+        }
+
+        for (int i = 10; i > 0; i--) {
+            context.setFill(colors[random.nextInt(10)]);
+            context.fillRect(220 + (10 - i) * 30, 470 + (10 - i) * 15, 64 * i, 30 * i);
+        }
     }
 
     private void findSet() {
