@@ -1,0 +1,3 @@
+// ilyesmit be kellett tenni futtatáshoz a VM options-be, mert nem találta a javafx.controls modult (alapból csak a javafx.base és javafx.graphics modulokat tette bele):
+// https://stackoverflow.com/questions/54291958/javafx-11-illegalaccesserror-when-creating-label
+-p /home/tveki/.m2/repository/org/openjfx/javafx-base/15/javafx-base-15-linux.jar:/home/tveki/.m2/repository/org/openjfx/javafx-graphics/15/javafx-graphics-15-linux.jar:/home/tveki/.m2/repository/org/openjfx/javafx-controls/15/javafx-controls-15-linux.jar --add-modules=javafx.controls
